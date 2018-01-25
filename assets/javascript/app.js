@@ -510,7 +510,7 @@ $(document).ready(function () {
                     $("#strain-info-div").html("Name: " + response.data[i].name + "<br>");
 
                     var genetics = response.data[i].genetics.names;
-                    $("#strain-genetics-div").html("<span>Genetics: " + genetics + "</span><br>");
+                    $("#strain-genetics-div").append("<span>Genetics: " + genetics + "</span><br>");
 
                     // var lineage = JSON.stringify(response.data[i].lineage);
                     // $("#strain-lineage-div").html("Origins: " + lineage + "<br>");
