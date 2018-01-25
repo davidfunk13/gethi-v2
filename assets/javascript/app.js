@@ -509,8 +509,8 @@ $(document).ready(function () {
                     $("#strain-photo-div").html("<img id='strain-photo' src='" + response.data[i].image +"'>");
                     $("#strain-info-div").html("Name: " + response.data[i].name + "<br>");
 
-                    var genetics = JSON.stringify(response.data[i].genetics.name);
-                    $("#strain-genetics-div").html("Genetics: " + genetics + "<br>");
+                    var genetics = response.data[i].genetics.names;
+                    $("#strain-genetics-div").html("<span>Genetics: " + genetics + "</span><br>");
 
                     // var lineage = JSON.stringify(response.data[i].lineage);
                     // $("#strain-lineage-div").html("Origins: " + lineage + "<br>");
