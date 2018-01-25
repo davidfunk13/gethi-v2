@@ -178,9 +178,7 @@ $(document).ready(function () {
                             lng: response.data[i].location.lng
                         });
                         function passLocation(){
-                            var markerGroup;
-                            markerGroup = L.layerGroup().addTo(map);
-                            L.marker([response.data[i].location.lat, response.data[i].location.lng] ).addTo(markerGroup)
+                            L.marker([response.data[i].location.lat, response.data[i].location.lng]).bindPopup(response.data[i].location.name).addTo(map);
                         }
                         passLocation();
                     }
