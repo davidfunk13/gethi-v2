@@ -22,7 +22,7 @@ $(document).ready(function () {
     var dispensaryLatLongs = [];
 
     function renderFlavorButtons() {
-        $(".all-flavor-buttons").empty();
+        $("#all-flavor-buttons").empty();
 
         allFlavors.sort();
         for (var i = 0; i < allFlavors.length; i++) {
@@ -30,7 +30,7 @@ $(document).ready(function () {
             tempButton.addClass("flavor-list-item btn btn-success btn-sm " + allFlavors[i]);
             tempButton.attr("data-name", allFlavors[i]);
             tempButton.text(allFlavors[i]);
-            $(".all-flavor-buttons").append(tempButton);
+            $("#all-flavor-buttons").append(tempButton);
         }
         allFlavors = [];
     }
@@ -52,7 +52,7 @@ $(document).ready(function () {
     //Hitting All Flavors button
     var hasClickedAllFlavors = false;
 
-    $(".all-flavors").on("click", function (event) {
+    $("#flavor-button").on("click", function (event) {
         event.preventDefault();
 
 
@@ -88,7 +88,7 @@ $(document).ready(function () {
 
     //Picking flavor button
     $(document).on("click", ".flavor-list-item", function () {
-
+        $("#flavor-recs-div").empty();
         pickedFlavor = true;
 
         console.log("you have picked an flavor.");
@@ -101,8 +101,6 @@ $(document).ready(function () {
             url: queryURL,
             method: "GET",
         }).done(function (response) {
-
-
             if (pickedEffect) {
                 //check to see if strains from flavor match strain from effect and only show if they have both.
                 for (var i = 0; i < response.length; i++) {
@@ -119,15 +117,15 @@ $(document).ready(function () {
 
                 $(".preference").toggle();
             } else {
-                $(".testcontent").empty();
+                $("#flavor-recs-div").empty();
 
-                for (var i = 0; i < response.length; i++) {
+                for (var i = 0; i < 20; i++) {
                     var name = response[i].name;
                     var tempButton = $("<button>");
                     tempButton.addClass("choice btn btn-success btn-sm preference " + name);
                     tempButton.attr("data-name", name);
                     tempButton.text(name);
-                    $(".testcontent").append(tempButton);
+                    $("#flavor-recs-div").append(tempButton);
                 }
             }
 
@@ -529,7 +527,7 @@ $(document).ready(function () {
                             console.log(EFresponse);
                             var effectsFlavors = JSON.stringify(EFresponse.data);
                             console.log(effectsFlavors);
-                            $("#strain-display").append(effectsFlavors);
+                            $("#flavors-display").append(effectsFlavors);
 
                         })
                         .fail(function (xhr, status, err) {
