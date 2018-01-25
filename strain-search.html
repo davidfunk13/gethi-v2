@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untitled</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <img class="img-circle img-responsive" src="assets/img/weed-logo.png" width="500" height="500">
+                <h1 class="text-center">GetHi. </h1>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                    <div id="strain-search-panel" class="panel-body">
+                        <p>Welcome to GetHi.</p>
+                        <p>Please select from the following options what you would like to do.</p>
+                        <h3>
+                            <em>
+                                <span style="text-decoration: underline;">Strain Search</span>
+                            </em>
+                        </h3>
+                        <p>Type in a strain, and we will locate information on the strain for you pulled fromour partner's ever
+                            expanding database of cannabis related information.</p>
+                        <input id="strain-input" class="input-lg" type="text">
+                        <button id="strain-submit" class="btn btn-default" type="button">Strain Search</button>
+                        <div id="strain-search-content"></div>
+                        <div id="strain-search-buttons"></div>
+                        <div id="strain-photo-div"></div>
+                        <div id="strain-info-div"></div>
+                        <div id="strain-locate-button"></div>
+                        <h3>Strain Location Map</h3>
+                        <div id="mapid"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="assets/javascript/jquery.min.js"></script>
+    <script src="assets/bootstrap/javascript/bootstrap.min.js"></script>
+    <script src="./assets/javascript/app.js"></script>
+    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
+        crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+        crossorigin="" />
+</body>
+
+</html>
