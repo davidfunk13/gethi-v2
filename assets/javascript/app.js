@@ -101,6 +101,7 @@ $(document).ready(function () {
             url: queryURL,
             method: "GET",
         }).done(function (response) {
+            console.log(pickedEffect)
             if (pickedEffect) {
                 //check to see if strains from flavor match strain from effect and only show if they have both.
                 for (var i = 0; i < response.length; i++) {
@@ -246,6 +247,7 @@ $(document).ready(function () {
         }).done(function runData(response) {
 
             console.log(response);
+           
             var topResults = $("#strain-search-buttons").html("<br><h3>Top Search Results:</h3><br>");
             topResults;
             for (var i = 0; i < response.length; i++) {
@@ -375,9 +377,9 @@ $(document).ready(function () {
 
         console.log("all effects pressed");
 
-        if (hasClickedAllEffects) {
+        // if (hasClickedAllEffects) {
             $(".effect-list-item").toggle();
-        } else {
+        // } else {
 
             var queryURL = "http://strainapi.evanbusse.com/" + APIforEvan + "/searchdata/effects";
             $.ajax({
@@ -397,8 +399,8 @@ $(document).ready(function () {
                     console.log(error);
                 });
 
-            hasClickedAllEffects = true;
-        }
+        //     hasClickedAllEffects = true;
+        // }
 
 
     });
@@ -484,13 +486,11 @@ $(document).ready(function () {
     //Hitting a choice button
     $(document).on("click", ".choice", function () {
         myUCPC = "";
-        // $(noMatch).remove();
-        // $(topResults).remove();
         $(".strain-display").empty();
         var myChoice = $(this).attr("data-name");
         var queryURL = "https://www.cannabisreports.com/api/v1.0/strains/search/" + myChoice;
 
-        console.log("I made a choice");
+        console.log({"I made a choice": myChoice});
         $.ajax({
             dataType: "jsonp",
             url: queryURL,
@@ -502,12 +502,13 @@ $(document).ready(function () {
 
                 console.log("entered for loop");
 
-                if (response.data[i].name === myChoice) {
-                    console.log("exact match");
-
+                // if (response.data[i].name === myChoice) {
+                //     console.log("exact match");
+                    var strainDescription = response.data[i].desc;
+                    var strainType = response.data[i].race;
                     $("#strain-photo-div").html("<img id='strain-photo' src='" + response.data[i].image + "'>");
-                    $("#strain-info-div").html("Name: " + response.data[i].name + "<br> Reported Effects (1-10 Scale): <br>");
-
+                    $("#strain-name-div").html("Name: " + response.data[i].name + "<br> Reported Effects (1-10 Scale): <br>");
+                    $("#strain-description-div").html(strainDescription)
                     var genetics = response.data[i].genetics.names;
                     $("#strain-genetics-div").append("<span>Genetics: " + genetics + "</span><br>");
 
@@ -527,20 +528,7 @@ $(document).ready(function () {
                         var effectsFlavors = JSON.stringify(EFresponse.data);
                         console.log(effectsFlavors);
                         $("#flavors-display").append(effectsFlavors);
-                        $("#strain-info-div").append("Anxiety: " + parseInt(EFresponse.data.anxiety) + "</br>");
-                        $("#strain-info-div").append("Appetite Stimulation: " + parseInt(EFresponse.data.appetite_gain) + "</br>");
-                        $("#strain-info-div").append("Calming: " + parseInt(EFresponse.data.calming) + "</br>");
-                        $("#strain-info-div").append("Creativity: " + parseInt(EFresponse.data.creativity) + "<br>");
-                        $("#strain-info-div").append("Dry Mouth: " + parseInt(EFresponse.data.dry_mouth) + "<br>");
-                        $("#strain-info-div").append("Euphoria: " + parseInt(EFresponse.data.euphoria) + "<br>");
-                        $("#strain-info-div").append("Numbness: " + parseInt(EFresponse.data.numbness) + "<br>");
-                        $("#strain-info-div").append("<h4>" + "Flavor and Aroma Profiles: " + "</h4>");
-                        $("#strain-info-div").append("Fruity: " + parseInt(EFresponse.data.fruity) + "<br>");
-                        $("#strain-info-div").append("Earthy: " + parseInt(EFresponse.data.earthy) + "<br>");
-                        $("#strain-info-div").append("Sour: " + parseInt(EFresponse.data.sour) + "<br>");
-                        $("#strain-info-div").append("Spicy: " + parseInt(EFresponse.data.spicy) + "<br>");
-                        $("#strain-info-div").append("Sweet: " + parseInt(EFresponse.data.sweet) + "<br>");
-                        $("#strain-info-div").append("Pine: " + parseInt(EFresponse.data.pine) + "<br>");
+                        $("#strain-info-div").html("Anxiety: " + parseInt(EFresponse.data.anxiety) + "</br>" + "Appetite Stimulation: " + parseInt(EFresponse.data.appetite_gain) + "</br>" + "Calming: " + parseInt(EFresponse.data.calming) + "</br>" + "Creativity: " + parseInt(EFresponse.data.creativity) + "<br>" + "Dry Mouth: " + parseInt(EFresponse.data.dry_mouth) + "<br>" + "Euphoria: " + parseInt(EFresponse.data.euphoria) + "<br>" + "Numbness: " + parseInt(EFresponse.data.numbness) + "<br>" + "<h4>" + "Flavor and Aroma Profiles: " + "</h4>" + "Fruity: " + parseInt(EFresponse.data.fruity) + "<br>" + "Earthy: " + parseInt(EFresponse.data.earthy) + "<br>" + "Sour: " + parseInt(EFresponse.data.sour) + "<br>" + "Spicy: " + parseInt(EFresponse.data.spicy) + "<br>" + "Sweet: " + parseInt(EFresponse.data.sweet) + "<br>" + "Pine: " + parseInt(EFresponse.data.pine) + "<br>");
                     })
                         .fail(function (xhr, status, err) {
                             console.log(err);
@@ -548,12 +536,12 @@ $(document).ready(function () {
 
                     //search through for effects/flavors for strain you picked
 
-                } else { //no exact match, show close matches
-                    console.log("no exact match.. show options");
-                    $(".testcontent").empty();
+                // } else { //no exact match, show close matches
+                    // console.log("no exact match.. show options");
+                    $("#effect-strain-returns").empty();
 
-                    var noMatch = $(".testcontent").html("There is no exact match. Did you mean...? <br>");
-                    noMatch;
+                    // var noMatch = $("#effect-strain-returns").html("There is no exact match. Did you mean...? <br>");
+                    // noMatch;
                     for (var i = 0; i < response.data.length; i++) {
                         console.log("entered for loop");
                         var name = response.data[i].name;
@@ -561,15 +549,32 @@ $(document).ready(function () {
                         tempButton.addClass("choice btn btn-success btn-sm preference " + name);
                         tempButton.attr("data-name", name);
                         tempButton.text(name);
-                        $(".testcontent").append(tempButton);
+                        $("#effect-strain-returns").append(tempButton);
                     }
 
 
 
-                }
+                // }
             }
         });
         $("#strain-locate-button").html("<br><input type ='button' id = 'locate-btn' value ='Locate the strain near you!'>");
 
     });
+    // $(".choice").on("click", function () {
+    //     var queryURL0 = "http://strainapi.evanbusse.com/" + APIforEvan + "/strains/search/name/" + strain;
+
+    //     var queryURL1 = "https://www.cannabisreports.com/api/v1.0/strains/search/" + strain;
+
+    //     $.ajax({
+    //         dataType: "json",
+    //         url: queryURL0,
+    //         method: "GET"
+    //     }).done(function runData(response) {
+    //         var strainDescription = 
+
+    //     })
+    //         .fail(function (xhr, status, error) {
+    //             console.log(error);
+    //         });
+    // })
 });
