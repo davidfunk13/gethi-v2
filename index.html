@@ -7,10 +7,47 @@
     <title>Untitled</title>
     <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
+    <script src="assets/javascript/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(window).on('load', function () {
+            $('#myModal').modal('show');
+        });
+    </script>
 </head>
 
 <body>
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Log Into GetHi, Signup, or close to be a Guest!</h4>
+                </div>
+                <div class="modal-body">
+                    <!-- Auth -->
+                    <label id="user-label" for="userEmail">User Email: </label>
+                    <input type="email" id="user-name" placeholder="sample@email.com">
+                    <label id="password-label" for="userPassword">Password: </label>
+                    <input type="password" id="password" placeholder="Password">
+                    <button id="login-button" type="submit" class="btn btn-default login-btn" data-dismiss="modal">
+                        Log In
+                    </button>
+                    <button id="signup-button" type="submit" class="btn btn-default signup-btn" data-dismiss="modal">
+                        Sign Up
+                    </button>
+                    <!-- Auth End  -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
     <div class="container">
+
+
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <img id="weedleaf" class="img-responsive" src="assets/img/weed-logo.png" width="500" height="500">
@@ -18,8 +55,14 @@
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="panel panel-info">
+
                     <div class="panel-body">
-                        <p>Welcome to GetHi.</p>
+                        <p>
+                            <span id="logged-in-user"></span>
+                            <button id="logout-button" type="submit" class="btn btn-danger logout-btn hideme">
+                                Log Out
+                            </button>
+                        </p>
                         <p>Please select from the following options what you would like to do.</p>
                         <h3>
                             <em>
@@ -50,7 +93,8 @@
                             </em>
                         </h3>
                         <p>Cross reference search with effects AND flavors!</p>
-                        <button id="effect-and-flavor-button" onclick="window.location.href='./effects-and-flavors-search.html'" class="btn btn-default" type="button">Search Effects And Flavors</button>
+                        <button id="effect-and-flavor-button" onclick="window.location.href='./effects-and-flavors-search.html'" class="btn btn-default"
+                            type="button">Search Effects And Flavors</button>
 
                         <div id="mapid" class="hidden"></div>
                     </div>
@@ -60,6 +104,8 @@
     </div>
     <script src="assets/javascript/jquery.min.js"></script>
     <script src="assets/bootstrap/javascript/bootstrap.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+    <script src="assets/javascript/login.js"></script>
 </body>
 
 </html>

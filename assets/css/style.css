@@ -11,10 +11,11 @@ div.panel-body {
     margin-top: 101px;
   }
   div.panel {
-  margin-top: 30px;
-  margin-bottom: 30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
 }
-}
+
 @media (min-width:768px) and (max-width:1023px) {
   #weedleaf {
     margin-left: 100px;
@@ -24,10 +25,11 @@ div.panel-body {
     margin-top: 101px;
   }
   div.panel {
-  margin-top: 30px;
-  margin-bottom: 30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
 }
-}
+
 @media (max-width:767px) {
   #weedleaf {
     margin-left: 0%;
@@ -73,15 +75,51 @@ div.panel-body {
   align-content: center;
   padding: 1px;
 }
-.effect-list-item{
+
+.effect-list-item {
   margin-top: 5px;
   margin-right: 5px;
 }
-.choice{
+
+.choice {
   margin-top: 5px;
   margin-right: 5px;
 }
-.flavor-list-item{
+
+.flavor-list-item {
   margin-top: 5px;
   margin-right: 5px;
+}
+
+.hideme {
+  display: none;
+}
+
+#logout-button {
+  float: right;
+  margin-top: 15px;
+  margin-right: 10px;
+}
+
+#login-button {
+  margin-top: 30px;
+  margin-left: 30px;
+  margin-right: 100px;
+  border: 1px solid black;
+  width: 500px;
+}
+
+#signup-button {
+  margin-top: 20px;
+  margin-left: 30px;
+  border: 1px solid black;
+  width: 500px;
+}
+#password-label{
+  margin-right:0px; 
+  margin-top: 30px;
+}
+#user-label{
+  margin-left:30px; 
+  margin-top: 30px;
 }
