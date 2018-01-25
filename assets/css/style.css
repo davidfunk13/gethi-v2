@@ -1,5 +1,5 @@
 div.panel-body {
-  height: 580px;
+  height: 100%;
 }
 
 @media (min-width:1024px) {

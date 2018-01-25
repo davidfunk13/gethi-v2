@@ -512,10 +512,10 @@ $(document).ready(function () {
                     $("#strain-info-div").html("Name: " + response.data[i].name + "<br>");
 
                     var genetics = JSON.stringify(response.data[i].genetics.name);
-                    $("#strain-genetics-div").append("Genetics: " + genetics + "<br>");
+                    $("#strain-genetics-div").html("Genetics: " + genetics + "<br>");
 
-                    var lineage = JSON.parse(response.data[i].lineage);
-                    $("#strain-lineage-div").append("Origins: " + lineage + "<br>");
+                    // var lineage = JSON.stringify(response.data[i].lineage);
+                    // $("#strain-lineage-div").html("Origins: " + lineage + "<br>");
 
                     myUCPC = response.data[i].ucpc;
 
