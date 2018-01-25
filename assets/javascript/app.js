@@ -102,22 +102,22 @@ $(document).ready(function () {
             method: "GET",
         }).done(function (response) {
             console.log(pickedEffect)
-            if (pickedEffect) {
-                //check to see if strains from flavor match strain from effect and only show if they have both.
-                for (var i = 0; i < response.length; i++) {
+            // if (pickedEffect) {
+            //     //check to see if strains from flavor match strain from effect and only show if they have both.
+            //     for (var i = 0; i < response.length; i++) {
 
-                    if ($(".choice").hasClass(response[i].name)) {
-                        console.log(response[i].name);
-                        console.log("Has both flavor and effect");
-                        var name = response[i].name;
-                        $("." + response[i].name).removeClass("preference");
-                        $("." + response[i].name).addClass("special");
+            //         if ($(".choice").hasClass(response[i].name)) {
+            //             console.log(response[i].name);
+            //             console.log("Has both flavor and effect");
+            //             var name = response[i].name;
+            //             $("." + response[i].name).removeClass("preference");
+            //             $("." + response[i].name).addClass("special");
 
-                    }
-                }
+            //         }
+            //     }
 
-                $(".preference").toggle();
-            } else {
+            //     $(".preference").toggle();
+            // } else {
                 $("#flavor-recs-div").empty();
 
                 for (var i = 0; i < response.length; i++) {
@@ -128,7 +128,7 @@ $(document).ready(function () {
                     tempButton.text(name);
                     $("#flavor-recs-div").append(tempButton);
                 }
-            }
+            // }
 
         })
 
@@ -247,7 +247,7 @@ $(document).ready(function () {
         }).done(function runData(response) {
 
             console.log(response);
-           
+
             var topResults = $("#strain-search-buttons").html("<br><h3>Top Search Results:</h3><br>");
             topResults;
             for (var i = 0; i < response.length; i++) {
@@ -378,26 +378,26 @@ $(document).ready(function () {
         console.log("all effects pressed");
 
         // if (hasClickedAllEffects) {
-            $(".effect-list-item").toggle();
+        $(".effect-list-item").toggle();
         // } else {
 
-            var queryURL = "http://strainapi.evanbusse.com/" + APIforEvan + "/searchdata/effects";
-            $.ajax({
-                dataType: "json",
-                url: queryURL,
-                method: "GET"
-            }).done(function (response) {
-                console.log(response);
+        var queryURL = "http://strainapi.evanbusse.com/" + APIforEvan + "/searchdata/effects";
+        $.ajax({
+            dataType: "json",
+            url: queryURL,
+            method: "GET"
+        }).done(function (response) {
+            console.log(response);
 
-                for (var i = 0; i < response.length; i++) {
-                    allEffects.push(response[i].effect);
-                }
+            for (var i = 0; i < response.length; i++) {
+                allEffects.push(response[i].effect);
+            }
 
-                renderEffectsButtons();
-            })
-                .fail(function (xhr, status, error) {
-                    console.log(error);
-                });
+            renderEffectsButtons();
+        })
+            .fail(function (xhr, status, error) {
+                console.log(error);
+            });
 
         //     hasClickedAllEffects = true;
         // }
@@ -425,7 +425,7 @@ $(document).ready(function () {
             console.log(response);
 
 
-            if (pickedFlavor) {
+            // if (pickedFlavor) {
                 //check to see if strains from flavor match strain from effect and only show if they have both.
                 for (var i = 0; i < response.length; i++) {
 
@@ -439,8 +439,8 @@ $(document).ready(function () {
                     }
                 }
 
-                $(".preference").toggle();
-            } else {
+            //     $(".preference").toggle();
+            // } else {
                 $("#effect-strain-returns").empty();
 
                 for (var i = 0; i < 20; i++) {
@@ -451,7 +451,7 @@ $(document).ready(function () {
                     tempButton.text(name);
                     $("#effect-strain-returns").append(tempButton);
                 }
-            }
+            // }
 
         })
 
@@ -490,7 +490,7 @@ $(document).ready(function () {
         var myChoice = $(this).attr("data-name");
         var queryURL = "https://www.cannabisreports.com/api/v1.0/strains/search/" + myChoice;
 
-        console.log({"I made a choice": myChoice});
+        console.log({ "I made a choice": myChoice });
         $.ajax({
             dataType: "jsonp",
             url: queryURL,
@@ -504,53 +504,53 @@ $(document).ready(function () {
 
                 // if (response.data[i].name === myChoice) {
                 //     console.log("exact match");
-                    var strainDescription = response.data[i].desc;
-                    var strainType = response.data[i].race;
-                    $("#strain-photo-div").html("<img id='strain-photo' src='" + response.data[i].image + "'>");
-                    $("#strain-name-div").html("Name: " + response.data[i].name + "<br> Reported Effects (1-10 Scale): <br>");
-                    $("#strain-description-div").html(strainDescription)
-                    var genetics = response.data[i].genetics.names;
-                    $("#strain-genetics-div").append("<span>Genetics: " + genetics + "</span><br>");
+                var strainDescription = response.data[i].desc;
+                var strainType = response.data[i].race;
+                $("#strain-photo-div").html("<img id='strain-photo' src='" + response.data[i].image + "'>");
+                $("#strain-name-div").html("Name: " + response.data[i].name + "<br> Reported Effects (1-10 Scale): <br>");
+                $("#strain-description-div").html(strainDescription)
+                var genetics = response.data[i].genetics.names;
+                $("#strain-genetics-div").append("<span>Genetics: " + genetics + "</span><br>");
 
-                    // var lineage = JSON.stringify(response.data[i].lineage);
-                    // $("#strain-lineage-div").html("Origins: " + lineage + "<br>");
+                // var lineage = JSON.stringify(response.data[i].lineage);
+                // $("#strain-lineage-div").html("Origins: " + lineage + "<br>");
 
-                    myUCPC = response.data[i].ucpc;
+                myUCPC = response.data[i].ucpc;
 
-                    var EFQueryURL = "https://www.cannabisreports.com/api/v1.0/strains/" + myUCPC + "/effectsFlavors";
+                var EFQueryURL = "https://www.cannabisreports.com/api/v1.0/strains/" + myUCPC + "/effectsFlavors";
 
-                    $.ajax({
-                        dataType: "jsonp",
-                        url: EFQueryURL,
-                        method: "GET",
-                    }).done(function (EFresponse) {
-                        console.log(EFresponse);
-                        var effectsFlavors = JSON.stringify(EFresponse.data);
-                        console.log(effectsFlavors);
-                        $("#flavors-display").append(effectsFlavors);
-                        $("#strain-info-div").html("Anxiety: " + parseInt(EFresponse.data.anxiety) + "</br>" + "Appetite Stimulation: " + parseInt(EFresponse.data.appetite_gain) + "</br>" + "Calming: " + parseInt(EFresponse.data.calming) + "</br>" + "Creativity: " + parseInt(EFresponse.data.creativity) + "<br>" + "Dry Mouth: " + parseInt(EFresponse.data.dry_mouth) + "<br>" + "Euphoria: " + parseInt(EFresponse.data.euphoria) + "<br>" + "Numbness: " + parseInt(EFresponse.data.numbness) + "<br>" + "<h4>" + "Flavor and Aroma Profiles: " + "</h4>" + "Fruity: " + parseInt(EFresponse.data.fruity) + "<br>" + "Earthy: " + parseInt(EFresponse.data.earthy) + "<br>" + "Sour: " + parseInt(EFresponse.data.sour) + "<br>" + "Spicy: " + parseInt(EFresponse.data.spicy) + "<br>" + "Sweet: " + parseInt(EFresponse.data.sweet) + "<br>" + "Pine: " + parseInt(EFresponse.data.pine) + "<br>");
+                $.ajax({
+                    dataType: "jsonp",
+                    url: EFQueryURL,
+                    method: "GET",
+                }).done(function (EFresponse) {
+                    console.log(EFresponse);
+                    var effectsFlavors = JSON.stringify(EFresponse.data);
+                    console.log(effectsFlavors);
+                    $("#flavors-display").append(effectsFlavors);
+                    $("#strain-info-div").html("Anxiety: " + parseInt(EFresponse.data.anxiety) + "</br>" + "Appetite Stimulation: " + parseInt(EFresponse.data.appetite_gain) + "</br>" + "Calming: " + parseInt(EFresponse.data.calming) + "</br>" + "Creativity: " + parseInt(EFresponse.data.creativity) + "<br>" + "Dry Mouth: " + parseInt(EFresponse.data.dry_mouth) + "<br>" + "Euphoria: " + parseInt(EFresponse.data.euphoria) + "<br>" + "Numbness: " + parseInt(EFresponse.data.numbness) + "<br>" + "<h4>" + "Flavor and Aroma Profiles: " + "</h4>" + "Fruity: " + parseInt(EFresponse.data.fruity) + "<br>" + "Earthy: " + parseInt(EFresponse.data.earthy) + "<br>" + "Sour: " + parseInt(EFresponse.data.sour) + "<br>" + "Spicy: " + parseInt(EFresponse.data.spicy) + "<br>" + "Sweet: " + parseInt(EFresponse.data.sweet) + "<br>" + "Pine: " + parseInt(EFresponse.data.pine) + "<br>");
+                })
+                    .fail(function (xhr, status, err) {
+                        console.log(err);
                     })
-                        .fail(function (xhr, status, err) {
-                            console.log(err);
-                        })
 
-                    //search through for effects/flavors for strain you picked
+                //search through for effects/flavors for strain you picked
 
                 // } else { //no exact match, show close matches
-                    // console.log("no exact match.. show options");
-                    $("#effect-strain-returns").empty();
+                // console.log("no exact match.. show options");
+                $("#effect-strain-returns").empty();
 
-                    // var noMatch = $("#effect-strain-returns").html("There is no exact match. Did you mean...? <br>");
-                    // noMatch;
-                    for (var i = 0; i < response.data.length; i++) {
-                        console.log("entered for loop");
-                        var name = response.data[i].name;
-                        var tempButton = $("<button>");
-                        tempButton.addClass("choice btn btn-success btn-sm preference " + name);
-                        tempButton.attr("data-name", name);
-                        tempButton.text(name);
-                        $("#effect-strain-returns").append(tempButton);
-                    }
+                // var noMatch = $("#effect-strain-returns").html("There is no exact match. Did you mean...? <br>");
+                // noMatch;
+                for (var i = 0; i < response.data.length; i++) {
+                    console.log("entered for loop");
+                    var name = response.data[i].name;
+                    var tempButton = $("<button>");
+                    tempButton.addClass("choice btn btn-success btn-sm preference " + name);
+                    tempButton.attr("data-name", name);
+                    tempButton.text(name);
+                    $("#effect-strain-returns").append(tempButton);
+                }
 
 
 

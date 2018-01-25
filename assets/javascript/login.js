@@ -42,7 +42,7 @@ $(document).ready(function () {
             if(firebaseUser) {
                 $("#logged-in-user").html("Welcome to GetHi, " + firebaseUser.email);
                 $(".logout-btn").removeClass("hideme");
-                $(".signup-btn").addClass("hideme");
+                // $(".signup-btn").addClass("hideme");
     
             } else {
                 $(".logout-btn").addClass("hideme");
