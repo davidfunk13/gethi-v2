@@ -443,7 +443,7 @@ $(document).ready(function () {
             // } else {
                 $("#effect-strain-returns").empty();
 
-                for (var i = 0; i < 20; i++) {
+                for (var i = 0; i < response.length; i++) {
                     var name = response[i].name;
                     var tempButton = $("<button>");
                     tempButton.addClass("choice btn btn-success btn-sm preference " + name);
@@ -511,7 +511,7 @@ $(document).ready(function () {
                 $("#strain-name-div").html("Name: " + response.data[i].name + "<br> Reported Effects (1-10 Scale): <br>");
                 // $("#strain-description-div").html(strainDescription)
                 var genetics = response.data[i].genetics.names;
-                $("#strain-genetics-div").append("<span>Genetics: " + genetics + "</span><br>");
+                $("#strain-genetics-div").html("<span>Genetics: " + genetics + "</span><br>");
 
                 // var lineage = JSON.stringify(response.data[i].lineage);
                 // $("#strain-lineage-div").html("Origins: " + lineage + "<br>");
