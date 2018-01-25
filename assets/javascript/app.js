@@ -36,7 +36,7 @@ $(document).ready(function () {
     }
 
     function renderEffectsButtons() {
-        $(".all-effect-buttons").empty();
+        $("#all-effects-buttons").empty();
 
         allEffects.sort();
         for (var i = 0; i < allEffects.length; i++) {
@@ -44,7 +44,7 @@ $(document).ready(function () {
             tempButton.addClass("effect-list-item btn btn-success btn-sm " + allEffects[i]);
             tempButton.attr("data-name", allEffects[i]);
             tempButton.text(allEffects[i]);
-            $(".all-effect-buttons").append(tempButton);
+            $("#all-effects-buttons").append(tempButton);
         }
         allEffects = [];
     }
@@ -374,7 +374,7 @@ $(document).ready(function () {
 
     //All effects button
     var hasClickedAllEffects = false;
-    $(".all-effects").on("click", function (event) {
+    $("#all-effects-button").on("click", function (event) {
         event.preventDefault();
 
         console.log("all effects pressed");
@@ -443,15 +443,15 @@ $(document).ready(function () {
 
                 $(".preference").toggle();
             } else {
-                $(".testcontent").empty();
+                $("#effect-strain-returns").empty();
 
-                for (var i = 0; i < response.length; i++) {
+                for (var i = 0; i < 20; i++) {
                     var name = response[i].name;
                     var tempButton = $("<button>");
                     tempButton.addClass("choice btn btn-success btn-sm preference " + name);
                     tempButton.attr("data-name", name);
                     tempButton.text(name);
-                    $(".testcontent").append(tempButton);
+                    $("#effect-strain-returns").append(tempButton);
                 }
             }
 
