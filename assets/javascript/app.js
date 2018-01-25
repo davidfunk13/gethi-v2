@@ -56,7 +56,7 @@ $(document).ready(function () {
         event.preventDefault();
 
 
-        console.log("all flavors pressed");
+        // console.log("all flavors pressed");
         if (hasClickedAllFlavors) {
             $(".flavor-list-item").toggle();
 
@@ -67,7 +67,7 @@ $(document).ready(function () {
                 url: queryURL,
                 method: "GET"
             }).done(function (response) {
-                console.log(response);
+                // console.log(response);
 
                 for (var i = 0; i < response.length; i++) {
                     allFlavors.push(response[i]);
@@ -76,7 +76,7 @@ $(document).ready(function () {
                 renderFlavorButtons();
             })
                 .fail(function (xhr, status, error) {
-                    console.log(error);
+                    // console.log(error);
                 });
             hasClickedAllFlavors = true;
         }
@@ -91,9 +91,9 @@ $(document).ready(function () {
         $("#flavor-recs-div").empty();
         pickedFlavor = true;
 
-        console.log("you have picked an flavor.");
+        // console.log("you have picked an flavor.");
         var flavor = $(this).attr("data-name");
-        console.log(flavor);
+        // console.log(flavor);
 
         var queryURL = "http://strainapi.evanbusse.com/" + APIforEvan + "/strains/search/flavor/" + flavor;
         $.ajax({
@@ -101,13 +101,13 @@ $(document).ready(function () {
             url: queryURL,
             method: "GET",
         }).done(function (response) {
-            console.log(pickedEffect)
+            // console.log(pickedEffect)
             // if (pickedEffect) {
             //     //check to see if strains from flavor match strain from effect and only show if they have both.
             //     for (var i = 0; i < response.length; i++) {
 
             //         if ($(".choice").hasClass(response[i].name)) {
-            //             console.log(response[i].name);
+                        // console.log(response[i].name);
             //             console.log("Has both flavor and effect");
             //             var name = response[i].name;
             //             $("." + response[i].name).removeClass("preference");
@@ -140,7 +140,7 @@ $(document).ready(function () {
 
 
     $(document).on("click", "#locate-btn", function () {
-        console.log("I pressed the locator");
+        // console.log("I pressed the locator");
         getLocation();
 
         var x = document.getElementById("locator");
@@ -160,17 +160,17 @@ $(document).ready(function () {
 
             myLat = position.coords.latitude;
             myLong = position.coords.longitude;
-            console.log(myLat);
-            console.log(myLong);
+            // console.log(myLat);
+            // console.log(myLong);
             var locQuery = "https://www.cannabisreports.com/api/v1.0/strains/" + myUCPC + "/availability/geo/" + myLat + "/" + myLong + "/25";
-            console.log(locQuery);
+            // console.log(locQuery);
             $.ajax({
                 dataType: "jsonp",
                 url: locQuery,
                 method: "GET",
             }).done(function (response) {
 
-                console.log(response);
+                // console.log(response);
 
                 for (var i = 0; i < response.data.length; i++) {
                     dispensaries.push({
@@ -187,12 +187,12 @@ $(document).ready(function () {
 
             })
                 .fail(function (xhr, status, err) {
-                    console.log(err);
+                    // console.log(err);
                 });
         }
 
         function geoError() {
-            console.log("Not Allowed");
+            // console.log("Not Allowed");
         }
 
         // var locQuery = "https://www.cannabisreports.com/api/v1.0/strains/" + myUCPC + "/availability/geo/" + myLat + "/" + myLong + "/10";
@@ -206,7 +206,7 @@ $(document).ready(function () {
     $(".flavor-submit").on("click", function (event) {
         event.preventDefault();
 
-        console.log("flavor pressed");
+        // console.log("flavor pressed");
         var flavor = $(".flavor-input").val().trim();
         var queryURL = "http://strainapi.evanbusse.com/" + APIforEvan + "/strains/search/flavor/" + flavor;
         $.ajax({
@@ -214,10 +214,10 @@ $(document).ready(function () {
             url: queryURL,
             method: "GET"
         }).done(function (response) {
-            console.log(response);
+            // console.log(response);
         })
             .fail(function (xhr, status, error) {
-                console.log(error);
+                // console.log(error);
             });
 
     });
@@ -226,7 +226,7 @@ $(document).ready(function () {
     $("#strain-submit").on("click", function (event) {
         event.preventDefault();
 
-        console.log("strain pressed");
+        // console.log("strain pressed");
         var strain = $("#strain-input").val().trim();
         // var pageNumber = 1;
         // var queryURL = "http://api.otreeba.com/v1/strains?page="+ pageNumber + "&count=50&sort=name";
@@ -236,7 +236,7 @@ $(document).ready(function () {
         var queryURL1 = "https://www.cannabisreports.com/api/v1.0/strains/search/" + strain;
 
         //     $.getJSON("http://www.cannabisreports.com/api/v1.0/strains/VUJCJ4TYMG000000000000000", function(data) { 
-        //     console.log(data);
+            // console.log(data);
         // });
 
         //searches evanbuss api
@@ -246,7 +246,7 @@ $(document).ready(function () {
             method: "GET"
         }).done(function runData(response) {
 
-            console.log(response);
+            // console.log(response);
 
             var topResults = $("#strain-search-buttons").html("<br><h3>Top Search Results:</h3><br>");
             topResults;
@@ -261,7 +261,7 @@ $(document).ready(function () {
 
         })
             .fail(function (xhr, status, error) {
-                console.log(error);
+                // console.log(error);
             });
 
         //searches CR API
@@ -271,7 +271,7 @@ $(document).ready(function () {
             method: "GET",
         }).done(function runData(response) {
 
-            console.log(response);
+            // console.log(response);
 
             for (var i = 0; i < response.data.length; i++) {
                 var name = response.data[i].name;
@@ -284,7 +284,7 @@ $(document).ready(function () {
 
             //if there is another page of results.
             // if (response.meta.pagination.links.next) {
-            //     console.log("There is another page");
+                // console.log("There is another page");
             //     var tempButton = $("<button>");
             //     tempButton.addClass("next btn btn-success btn-sm ");
             //     tempButton.attr("data-link", response.meta.pagination.links.next);
@@ -308,14 +308,14 @@ $(document).ready(function () {
                 $(".choice").remove();
 
                 var nextURL = "https://www.cannabisreports.com/api/v1.0/strains/search/" + strain + "?q=" + strain + "&page=" + pageNumber;
-                console.log(nextURL);
+                // console.log(nextURL);
 
                 $.ajax({
                     dataType: "jsonp",
                     url: nextURL,
                     method: "GET",
                 }).done(function (response) {
-                    console.log(response);
+                    // console.log(response);
 
                     for (var i = 0; i < response.data.length; i++) {
                         var name = response.data[i].name;
@@ -326,12 +326,12 @@ $(document).ready(function () {
                         $("#strain-search-content").prepend(tempButton);
                     }
                     // $(".testcontent").prepend(response);
-                    console.log("Next button works");
+                    // console.log("Next button works");
                 })
                 pageNumber++;
 
                 if (response.meta.pagination.links.previous) {
-                    console.log("There is previous page");
+                    // console.log("There is previous page");
                     var tempButton = $("<button>");
                     tempButton.addClass("previous btn btn-success btn-sm preference ");
                     tempButton.attr("data-link", response.meta.pagination.links.previous);
@@ -345,23 +345,23 @@ $(document).ready(function () {
             $(document).on("click", ".previous", function () {
 
                 var previousURL = "https://www.cannabisreports.com/api/v1.0/strains/search/" + strain + "?q=" + strain + "&page=" + pageNumber;
-                console.log(previousURL);
+                // console.log(previousURL);
 
                 $.ajax({
                     dataType: "jsonp",
                     url: previousURL,
                     method: "GET",
                 }).done(function (response) {
-                    console.log(response);
+                    // console.log(response);
                     $(".testcontent").prepend(response);
-                    console.log("previous button works");
+                    // console.log("previous button works");
                 })
                 pageNumber--;
             });
 
         })
             .fail(function (xhr, status, error) {
-                console.log(error);
+                // console.log(error);
             });
 
 
@@ -375,7 +375,7 @@ $(document).ready(function () {
     $("#all-effects-button").on("click", function (event) {
         event.preventDefault();
 
-        console.log("all effects pressed");
+        // console.log("all effects pressed");
 
         // if (hasClickedAllEffects) {
         $(".effect-list-item").toggle();
@@ -387,7 +387,7 @@ $(document).ready(function () {
             url: queryURL,
             method: "GET"
         }).done(function (response) {
-            console.log(response);
+            // console.log(response);
 
             for (var i = 0; i < response.length; i++) {
                 allEffects.push(response[i].effect);
@@ -396,7 +396,7 @@ $(document).ready(function () {
             renderEffectsButtons();
         })
             .fail(function (xhr, status, error) {
-                console.log(error);
+                // console.log(error);
             });
 
         //     hasClickedAllEffects = true;
@@ -409,12 +409,12 @@ $(document).ready(function () {
 
     //Picking effect button
     $(document).on("click", ".effect-list-item", function () {
-        console.log("you have picked an effect.");
+        // console.log("you have picked an effect.");
         pickedEffect = true;
         //    $(noMatch).remove();
         //    $(topResults).remove();
         var effect = $(this).attr("data-name");
-        console.log(effect);
+        // console.log(effect);
 
         var queryURL = "http://strainapi.evanbusse.com/" + APIforEvan + "/strains/search/effect/" + effect;
         $.ajax({
@@ -422,7 +422,7 @@ $(document).ready(function () {
             url: queryURL,
             method: "GET",
         }).done(function (response) {
-            console.log(response);
+            // console.log(response);
 
 
             // if (pickedFlavor) {
@@ -430,8 +430,8 @@ $(document).ready(function () {
                 for (var i = 0; i < response.length; i++) {
 
                     if ($(".choice").hasClass(response[i].name)) {
-                        console.log(response[i].name);
-                        console.log("Has both flavor and effect");
+                        // console.log(response[i].name);
+                        // console.log("Has both flavor and effect");
                         var name = response[i].name;
                         $("." + name).removeClass("preference");
                         $("." + name).addClass("special");
@@ -463,7 +463,7 @@ $(document).ready(function () {
     $(".effect-submit").on("click", function (event) {
         event.preventDefault();
 
-        console.log("effect pressed");
+        // console.log("effect pressed");
 
         var effect = $(".effect-input").val().trim();
         var queryURL = "http://strainapi.evanbusse.com/" + APIforEvan + "/strains/search/effect/" + effect;
@@ -472,11 +472,11 @@ $(document).ready(function () {
             url: queryURL,
             method: "GET"
         }).done(function (response) {
-            console.log(response);
+            // console.log(response);
 
         })
             .fail(function (xhr, status, error) {
-                console.log(error);
+                // console.log(error);
             });
 
     });
@@ -490,17 +490,17 @@ $(document).ready(function () {
         var myChoice = $(this).attr("data-name");
         var queryURL = "https://www.cannabisreports.com/api/v1.0/strains/search/" + myChoice;
 
-        console.log({ "I made a choice": myChoice });
+        // console.log({ "I made a choice": myChoice });
         $.ajax({
             dataType: "jsonp",
             url: queryURL,
             method: "GET",
         }).done(function (response) {
 
-            console.log(response);
+            // console.log(response);
             for (var i = 0; i < response.data.length; i++) {
 
-                console.log("entered for loop");
+                // console.log("entered for loop");
 
                 // if (response.data[i].name === myChoice) {
                 //     console.log("exact match");
@@ -525,14 +525,14 @@ $(document).ready(function () {
                     url: EFQueryURL,
                     method: "GET",
                 }).done(function (EFresponse) {
-                    console.log(EFresponse);
+                    // console.log(EFresponse);
                     var effectsFlavors = JSON.stringify(EFresponse.data);
-                    console.log(effectsFlavors);
+                    // console.log(effectsFlavors);
                     $("#flavors-display").append(effectsFlavors);
                     $("#strain-info-div").html("Anxiety: " + parseInt(EFresponse.data.anxiety) + "</br>" + "Appetite Stimulation: " + parseInt(EFresponse.data.appetite_gain) + "</br>" + "Calming: " + parseInt(EFresponse.data.calming) + "</br>" + "Creativity: " + parseInt(EFresponse.data.creativity) + "<br>" + "Dry Mouth: " + parseInt(EFresponse.data.dry_mouth) + "<br>" + "Euphoria: " + parseInt(EFresponse.data.euphoria) + "<br>" + "Numbness: " + parseInt(EFresponse.data.numbness) + "<br>" + "<h4>" + "Flavor and Aroma Profiles: " + "</h4>" + "Fruity: " + parseInt(EFresponse.data.fruity) + "<br>" + "Earthy: " + parseInt(EFresponse.data.earthy) + "<br>" + "Sour: " + parseInt(EFresponse.data.sour) + "<br>" + "Spicy: " + parseInt(EFresponse.data.spicy) + "<br>" + "Sweet: " + parseInt(EFresponse.data.sweet) + "<br>" + "Pine: " + parseInt(EFresponse.data.pine) + "<br>");
                 })
                     .fail(function (xhr, status, err) {
-                        console.log(err);
+                        // console.log(err);
                     })
 
                 //search through for effects/flavors for strain you picked
@@ -544,7 +544,7 @@ $(document).ready(function () {
                 // var noMatch = $("#effect-strain-returns").html("There is no exact match. Did you mean...? <br>");
                 // noMatch;
                 for (var i = 0; i < response.data.length; i++) {
-                    console.log("entered for loop");
+                    // console.log("entered for loop");
                     var name = response.data[i].name;
                     var tempButton = $("<button>");
                     tempButton.addClass("choice btn btn-success btn-sm preference " + name);
