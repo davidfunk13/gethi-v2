@@ -4,8 +4,15 @@ div.panel-body {
 
 #mapid {
   height: 300px;
+  border: 1px solid black;
 }
-
+#strain-input{
+  border: 1px solid black;
+}
+#strain-submit{
+  margin-top: 5px;
+  border: 1px solid black;
+}
 #strain-search-panel {
   height: 100%;
 }
