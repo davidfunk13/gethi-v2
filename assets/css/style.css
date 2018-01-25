@@ -1,6 +1,58 @@
 div.panel-body {
   height: 580px;
 }
+@media (max-width:1440px){
+  #weedleaf{
+    margin-left: 25px;
+  }
+  body{
+    border:1px solid black;
+    margin-top: 101px;
+  }
+  div.panel{
+    margin-top:30px;
+    margin-bottom:30px;
+  }
+}
+@media (max-width:1024px){
+  #weedleaf{
+    margin-left: 0px;
+  }
+  body{
+    border:1px solid black;
+    margin-top: 101px;
+  }
+  div.panel{
+    margin-top:30px;
+    margin-bottom:30px;
+  }
+}
+@media (max-width:991px){
+  #weedleaf{
+    margin-left: 100px;
+  }
+  body{
+    border:1px solid black;
+    margin-top: 101px;
+  }
+  div.panel{
+    margin-top:30px;
+    margin-bottom:30px;
+  }
+}
+@media (max-width:767px){
+  #weedleaf{
+    margin-left: 0%;
+  }
+  body{
+    border:1px solid black;
+    margin-top: 101px;
+  }
+  div.panel{
+    margin-top:30px;
+    margin-bottom:30px;
+  }
+}
 
 #mapid {
   height: 300px;
