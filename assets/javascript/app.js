@@ -504,11 +504,12 @@ $(document).ready(function () {
 
                 // if (response.data[i].name === myChoice) {
                 //     console.log("exact match");
-                var strainDescription = response.data[i].desc;
-                var strainType = response.data[i].race;
+                // var strainDescription = response.data[i].desc;
+                // console.log(strainDescription);
+                // var strainType = response.data[i].race;
                 $("#strain-photo-div").html("<img id='strain-photo' src='" + response.data[i].image + "'>");
                 $("#strain-name-div").html("Name: " + response.data[i].name + "<br> Reported Effects (1-10 Scale): <br>");
-                $("#strain-description-div").html(strainDescription)
+                // $("#strain-description-div").html(strainDescription)
                 var genetics = response.data[i].genetics.names;
                 $("#strain-genetics-div").append("<span>Genetics: " + genetics + "</span><br>");
 
