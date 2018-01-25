@@ -511,11 +511,11 @@ $(document).ready(function () {
                     $("#strain-photo-div").html("<img id='strain-photo' src='" + response.data[i].image +"'>");
                     $("#strain-info-div").html("Name: " + response.data[i].name + "<br>");
 
-                    // var genetics = JSON.stringify(response.data[i].genetics.name);
-                    // $("#strain-display").append("Genetics: " + genetics + "<br>");
+                    var genetics = JSON.stringify(response.data[i].genetics.name);
+                    $("#strain-genetics-div").append("Genetics: " + genetics + "<br>");
 
-                    // var lineage = JSON.stringify(response.data[i].lineage);
-                    // $("#strain-display").append("Origins: " + lineage + "<br>");
+                    var lineage = JSON.parse(response.data[i].lineage);
+                    $("#strain-lineage-div").append("Origins: " + lineage + "<br>");
 
                     myUCPC = response.data[i].ucpc;
 
