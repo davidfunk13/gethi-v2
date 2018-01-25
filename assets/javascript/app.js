@@ -63,18 +63,18 @@ $(document).ready(function () {
         } else {
             var queryURL = "http://strainapi.evanbusse.com/" + APIforEvan + "/searchdata/flavors";
             $.ajax({
-                    dataType: "json",
-                    url: queryURL,
-                    method: "GET"
-                }).done(function (response) {
-                    console.log(response);
+                dataType: "json",
+                url: queryURL,
+                method: "GET"
+            }).done(function (response) {
+                console.log(response);
 
-                    for (var i = 0; i < response.length; i++) {
-                        allFlavors.push(response[i]);
-                    }
+                for (var i = 0; i < response.length; i++) {
+                    allFlavors.push(response[i]);
+                }
 
-                    renderFlavorButtons();
-                })
+                renderFlavorButtons();
+            })
                 .fail(function (xhr, status, error) {
                     console.log(error);
                 });
@@ -119,7 +119,7 @@ $(document).ready(function () {
             } else {
                 $("#flavor-recs-div").empty();
 
-                for (var i = 0; i < 20; i++) {
+                for (var i = 0; i < response.length; i++) {
                     var name = response[i].name;
                     var tempButton = $("<button>");
                     tempButton.addClass("choice btn btn-success btn-sm preference " + name);
@@ -164,27 +164,27 @@ $(document).ready(function () {
             var locQuery = "https://www.cannabisreports.com/api/v1.0/strains/" + myUCPC + "/availability/geo/" + myLat + "/" + myLong + "/25";
             console.log(locQuery);
             $.ajax({
-                    dataType: "jsonp",
-                    url: locQuery,
-                    method: "GET",
-                }).done(function (response) {
+                dataType: "jsonp",
+                url: locQuery,
+                method: "GET",
+            }).done(function (response) {
 
-                    console.log(response);
+                console.log(response);
 
-                    for (var i = 0; i < response.data.length; i++) {
-                        dispensaries.push({
-                            name: response.data[i].location.name,
-                            lat: response.data[i].location.lat,
-                            lng: response.data[i].location.lng
-                        });
-                        function passLocation(){
-                            L.marker([response.data[i].location.lat, response.data[i].location.lng]).bindPopup(response.data[i].location.name).addTo(map);
-                        }
-                        passLocation();
+                for (var i = 0; i < response.data.length; i++) {
+                    dispensaries.push({
+                        name: response.data[i].location.name,
+                        lat: response.data[i].location.lat,
+                        lng: response.data[i].location.lng
+                    });
+                    function passLocation() {
+                        L.marker([response.data[i].location.lat, response.data[i].location.lng]).bindPopup('<a href="https://www.google.com/search?q=' + response.data[i].location.name + '">' + response.data[i].location.name).addTo(map);
                     }
+                    passLocation();
+                }
 
 
-                })
+            })
                 .fail(function (xhr, status, err) {
                     console.log(err);
                 });
@@ -209,12 +209,12 @@ $(document).ready(function () {
         var flavor = $(".flavor-input").val().trim();
         var queryURL = "http://strainapi.evanbusse.com/" + APIforEvan + "/strains/search/flavor/" + flavor;
         $.ajax({
-                dataType: "json",
-                url: queryURL,
-                method: "GET"
-            }).done(function (response) {
-                console.log(response);
-            })
+            dataType: "json",
+            url: queryURL,
+            method: "GET"
+        }).done(function (response) {
+            console.log(response);
+        })
             .fail(function (xhr, status, error) {
                 console.log(error);
             });
@@ -240,124 +240,124 @@ $(document).ready(function () {
 
         //searches evanbuss api
         $.ajax({
-                dataType: "json",
-                url: queryURL0,
-                method: "GET"
-            }).done(function runData(response) {
+            dataType: "json",
+            url: queryURL0,
+            method: "GET"
+        }).done(function runData(response) {
 
-                console.log(response);
-                var topResults = $("#strain-search-buttons").html("<br><h3>Top Search Results:</h3><br>");
-                topResults;
-                for (var i = 0; i < response.length; i++) {
-                    var name = response[i].name;
-                    var tempButton = $("<button>");
-                    tempButton.addClass("choice btn btn-success btn-sm preference eb " + name);
-                    tempButton.attr("data-name", name);
-                    tempButton.text(name);
-                    // $(".testcontent").append(tempButton);
-                }
+            console.log(response);
+            var topResults = $("#strain-search-buttons").html("<br><h3>Top Search Results:</h3><br>");
+            topResults;
+            for (var i = 0; i < response.length; i++) {
+                var name = response[i].name;
+                var tempButton = $("<button>");
+                tempButton.addClass("choice btn btn-success btn-sm preference eb " + name);
+                tempButton.attr("data-name", name);
+                tempButton.text(name);
+                // $(".testcontent").append(tempButton);
+            }
 
-            })
+        })
             .fail(function (xhr, status, error) {
                 console.log(error);
             });
 
         //searches CR API
         $.ajax({
-                dataType: "jsonp",
-                url: queryURL1,
-                method: "GET",
-            }).done(function runData(response) {
+            dataType: "jsonp",
+            url: queryURL1,
+            method: "GET",
+        }).done(function runData(response) {
 
-                console.log(response);
+            console.log(response);
 
-                for (var i = 0; i < response.data.length; i++) {
-                    var name = response.data[i].name;
+            for (var i = 0; i < response.data.length; i++) {
+                var name = response.data[i].name;
+                var tempButton = $("<button>");
+                tempButton.addClass("choice btn btn-success btn-sm preference cr " + name);
+                tempButton.attr("data-name", name);
+                tempButton.text(name);
+                $("#strain-search-buttons").append(tempButton);
+            }
+
+            //if there is another page of results.
+            // if (response.meta.pagination.links.next) {
+            //     console.log("There is another page");
+            //     var tempButton = $("<button>");
+            //     tempButton.addClass("next btn btn-success btn-sm ");
+            //     tempButton.attr("data-link", response.meta.pagination.links.next);
+            //     tempButton.text("Next Page");
+            //     $("#strain-search-buttons").html(tempButton);
+
+            // }
+
+            // if(response.meta.pagination.links.previous){
+            //     console.log("There is previous page");
+            //     var tempButton = $("<button>");
+            //     tempButton.addClass("previous btn btn-success btn-sm ");
+            //     tempButton.attr("data-link",response.meta.pagination.links.previous);
+            //     tempButton.text("Previous Page");
+            //     $(".testcontent").append(tempButton);
+
+            // }
+
+            var pageNumber = 2;
+            $(document).on("click", ".next", function () {
+                $(".choice").remove();
+
+                var nextURL = "https://www.cannabisreports.com/api/v1.0/strains/search/" + strain + "?q=" + strain + "&page=" + pageNumber;
+                console.log(nextURL);
+
+                $.ajax({
+                    dataType: "jsonp",
+                    url: nextURL,
+                    method: "GET",
+                }).done(function (response) {
+                    console.log(response);
+
+                    for (var i = 0; i < response.data.length; i++) {
+                        var name = response.data[i].name;
+                        var tempButton = $("<button>");
+                        tempButton.addClass("choice btn btn-success btn-sm preference cr " + name);
+                        tempButton.attr("data-name", name);
+                        tempButton.text(name);
+                        $("#strain-search-content").prepend(tempButton);
+                    }
+                    // $(".testcontent").prepend(response);
+                    console.log("Next button works");
+                })
+                pageNumber++;
+
+                if (response.meta.pagination.links.previous) {
+                    console.log("There is previous page");
                     var tempButton = $("<button>");
-                    tempButton.addClass("choice btn btn-success btn-sm preference cr " + name);
-                    tempButton.attr("data-name", name);
-                    tempButton.text(name);
-                    $("#strain-search-buttons").append(tempButton);
+                    tempButton.addClass("previous btn btn-success btn-sm preference ");
+                    tempButton.attr("data-link", response.meta.pagination.links.previous);
+                    tempButton.text("Previous Page");
+                    $(".testcontent").append(tempButton);
+
                 }
 
-                //if there is another page of results.
-                // if (response.meta.pagination.links.next) {
-                //     console.log("There is another page");
-                //     var tempButton = $("<button>");
-                //     tempButton.addClass("next btn btn-success btn-sm ");
-                //     tempButton.attr("data-link", response.meta.pagination.links.next);
-                //     tempButton.text("Next Page");
-                //     $("#strain-search-buttons").html(tempButton);
+            });
 
-                // }
+            $(document).on("click", ".previous", function () {
 
-                // if(response.meta.pagination.links.previous){
-                //     console.log("There is previous page");
-                //     var tempButton = $("<button>");
-                //     tempButton.addClass("previous btn btn-success btn-sm ");
-                //     tempButton.attr("data-link",response.meta.pagination.links.previous);
-                //     tempButton.text("Previous Page");
-                //     $(".testcontent").append(tempButton);
+                var previousURL = "https://www.cannabisreports.com/api/v1.0/strains/search/" + strain + "?q=" + strain + "&page=" + pageNumber;
+                console.log(previousURL);
 
-                // }
+                $.ajax({
+                    dataType: "jsonp",
+                    url: previousURL,
+                    method: "GET",
+                }).done(function (response) {
+                    console.log(response);
+                    $(".testcontent").prepend(response);
+                    console.log("previous button works");
+                })
+                pageNumber--;
+            });
 
-                var pageNumber = 2;
-                $(document).on("click", ".next", function () {
-                    $(".choice").remove();
-
-                    var nextURL = "https://www.cannabisreports.com/api/v1.0/strains/search/" + strain + "?q=" + strain + "&page=" + pageNumber;
-                    console.log(nextURL);
-
-                    $.ajax({
-                        dataType: "jsonp",
-                        url: nextURL,
-                        method: "GET",
-                    }).done(function (response) {
-                        console.log(response);
-
-                        for (var i = 0; i < response.data.length; i++) {
-                            var name = response.data[i].name;
-                            var tempButton = $("<button>");
-                            tempButton.addClass("choice btn btn-success btn-sm preference cr " + name);
-                            tempButton.attr("data-name", name);
-                            tempButton.text(name);
-                            $("#strain-search-content").prepend(tempButton);
-                        }
-                        // $(".testcontent").prepend(response);
-                        console.log("Next button works");
-                    })
-                    pageNumber++;
-
-                    if (response.meta.pagination.links.previous) {
-                        console.log("There is previous page");
-                        var tempButton = $("<button>");
-                        tempButton.addClass("previous btn btn-success btn-sm preference ");
-                        tempButton.attr("data-link", response.meta.pagination.links.previous);
-                        tempButton.text("Previous Page");
-                        $(".testcontent").append(tempButton);
-
-                    }
-
-                });
-
-                $(document).on("click", ".previous", function () {
-
-                    var previousURL = "https://www.cannabisreports.com/api/v1.0/strains/search/" + strain + "?q=" + strain + "&page=" + pageNumber;
-                    console.log(previousURL);
-
-                    $.ajax({
-                        dataType: "jsonp",
-                        url: previousURL,
-                        method: "GET",
-                    }).done(function (response) {
-                        console.log(response);
-                        $(".testcontent").prepend(response);
-                        console.log("previous button works");
-                    })
-                    pageNumber--;
-                });
-
-            })
+        })
             .fail(function (xhr, status, error) {
                 console.log(error);
             });
@@ -381,18 +381,18 @@ $(document).ready(function () {
 
             var queryURL = "http://strainapi.evanbusse.com/" + APIforEvan + "/searchdata/effects";
             $.ajax({
-                    dataType: "json",
-                    url: queryURL,
-                    method: "GET"
-                }).done(function (response) {
-                    console.log(response);
+                dataType: "json",
+                url: queryURL,
+                method: "GET"
+            }).done(function (response) {
+                console.log(response);
 
-                    for (var i = 0; i < response.length; i++) {
-                        allEffects.push(response[i].effect);
-                    }
+                for (var i = 0; i < response.length; i++) {
+                    allEffects.push(response[i].effect);
+                }
 
-                    renderEffectsButtons();
-                })
+                renderEffectsButtons();
+            })
                 .fail(function (xhr, status, error) {
                     console.log(error);
                 });
@@ -466,13 +466,13 @@ $(document).ready(function () {
         var effect = $(".effect-input").val().trim();
         var queryURL = "http://strainapi.evanbusse.com/" + APIforEvan + "/strains/search/effect/" + effect;
         $.ajax({
-                dataType: "json",
-                url: queryURL,
-                method: "GET"
-            }).done(function (response) {
-                console.log(response);
+            dataType: "json",
+            url: queryURL,
+            method: "GET"
+        }).done(function (response) {
+            console.log(response);
 
-            })
+        })
             .fail(function (xhr, status, error) {
                 console.log(error);
             });
@@ -496,6 +496,7 @@ $(document).ready(function () {
             url: queryURL,
             method: "GET",
         }).done(function (response) {
+
             console.log(response);
             for (var i = 0; i < response.data.length; i++) {
 
@@ -504,7 +505,7 @@ $(document).ready(function () {
                 if (response.data[i].name === myChoice) {
                     console.log("exact match");
 
-                    $("#strain-photo-div").html("<img id='strain-photo' src='" + response.data[i].image +"'>");
+                    $("#strain-photo-div").html("<img id='strain-photo' src='" + response.data[i].image + "'>");
                     $("#strain-info-div").html("Name: " + response.data[i].name + "<br> Reported Effects (1-10 Scale): <br>");
 
                     var genetics = response.data[i].genetics.names;
@@ -518,17 +519,29 @@ $(document).ready(function () {
                     var EFQueryURL = "https://www.cannabisreports.com/api/v1.0/strains/" + myUCPC + "/effectsFlavors";
 
                     $.ajax({
-                            dataType: "jsonp",
-                            url: EFQueryURL,
-                            method: "GET",
-                        }).done(function (EFresponse) {
-                            console.log(EFresponse);
-                            var effectsFlavors = JSON.stringify(EFresponse.data);
-                            console.log(effectsFlavors);
-                            $("#flavors-display").append(effectsFlavors);
-                            $("#strain-info-div").append("Anxiety: " + parseInt(EFresponse.data.anxiety + "<br>"));
-
-                        })
+                        dataType: "jsonp",
+                        url: EFQueryURL,
+                        method: "GET",
+                    }).done(function (EFresponse) {
+                        console.log(EFresponse);
+                        var effectsFlavors = JSON.stringify(EFresponse.data);
+                        console.log(effectsFlavors);
+                        $("#flavors-display").append(effectsFlavors);
+                        $("#strain-info-div").append("Anxiety: " + parseInt(EFresponse.data.anxiety) + "</br>");
+                        $("#strain-info-div").append("Appetite Stimulation: " + parseInt(EFresponse.data.appetite_gain) + "</br>");
+                        $("#strain-info-div").append("Calming: " + parseInt(EFresponse.data.calming) + "</br>");
+                        $("#strain-info-div").append("Creativity: " + parseInt(EFresponse.data.creativity) + "<br>");
+                        $("#strain-info-div").append("Dry Mouth: " + parseInt(EFresponse.data.dry_mouth) + "<br>");
+                        $("#strain-info-div").append("Euphoria: " + parseInt(EFresponse.data.euphoria) + "<br>");
+                        $("#strain-info-div").append("Numbness: " + parseInt(EFresponse.data.numbness) + "<br>");
+                        $("#strain-info-div").append("<h4>" + "Flavor and Aroma Profiles: " + "</h4>");
+                        $("#strain-info-div").append("Fruity: " + parseInt(EFresponse.data.fruity) + "<br>");
+                        $("#strain-info-div").append("Earthy: " + parseInt(EFresponse.data.earthy) + "<br>");
+                        $("#strain-info-div").append("Sour: " + parseInt(EFresponse.data.sour) + "<br>");
+                        $("#strain-info-div").append("Spicy: " + parseInt(EFresponse.data.spicy) + "<br>");
+                        $("#strain-info-div").append("Sweet: " + parseInt(EFresponse.data.sweet) + "<br>");
+                        $("#strain-info-div").append("Pine: " + parseInt(EFresponse.data.pine) + "<br>");
+                    })
                         .fail(function (xhr, status, err) {
                             console.log(err);
                         })
@@ -556,7 +569,7 @@ $(document).ready(function () {
                 }
             }
         });
-        $("#strain-locate-button").html("<input type ='button' id = 'locate-btn' value ='Locate the strain.'>");
+        $("#strain-locate-button").html("<br><input type ='button' id = 'locate-btn' value ='Locate the strain near you!'>");
 
     });
 });
