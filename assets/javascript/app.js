@@ -505,7 +505,7 @@ $(document).ready(function () {
                     console.log("exact match");
 
                     $("#strain-photo-div").html("<img id='strain-photo' src='" + response.data[i].image +"'>");
-                    $("#strain-info-div").html("Name: " + response.data[i].name + "<br>");
+                    $("#strain-info-div").html("Name: " + response.data[i].name + "<br> Reported Effects (1-10 Scale): <br>");
 
                     var genetics = response.data[i].genetics.names;
                     $("#strain-genetics-div").append("<span>Genetics: " + genetics + "</span><br>");
@@ -526,6 +526,7 @@ $(document).ready(function () {
                             var effectsFlavors = JSON.stringify(EFresponse.data);
                             console.log(effectsFlavors);
                             $("#flavors-display").append(effectsFlavors);
+                            $("#strain-info-div").append("Anxiety: " + parseInt(EFresponse.data.anxiety + "<br>"));
 
                         })
                         .fail(function (xhr, status, err) {
