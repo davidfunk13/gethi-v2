@@ -47,6 +47,9 @@ $(document).ready(function () {
             } else {
                 $(".logout-btn").addClass("hideme");
                 $("#logged-in-user").html("Welcome to GetHi.");
+                $(window).on('load', function () {
+                    $('#myModal').modal('show');
+                });
             }
         });
 });
